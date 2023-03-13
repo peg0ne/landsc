@@ -75,9 +75,7 @@ class Inputs
             println("Loading landsc config")
             let inputs = load_json($"{home}/.config/landsc/config.json")
             println("Config loaded!")
-            select w from inputs.try_get("width")
-                width = w->value_or(0.0)
-            ;
+            width = inputs.try_get_value_of("width", 0.0)
             select inps from inputs.try_get("inputs")
                 for i until inps->size()
                     let name_str = ""
@@ -89,30 +87,14 @@ class Inputs
                     let issys = false
                     let isstatic = false
                     select inp from inps->try_get(i)
-                        select n from inp->try_get("name")
-                            name_str = n->value_or((string)"")
-                        ;
-                        select c from inp->try_get("content")
-                            content = c->value_or((string)"")
-                        ;
-                        select sc from inp->try_get("secondarycontent")
-                            secondarycontent = sc->value_or((string)"")
-                        ;
-                        select op from inp->try_get("operation")
-                            operation = op->value_or((string)"")
-                        ;
-                        select pref from inp->try_get("prefix")
-                            prefix = pref->value_or((string)"")
-                        ;
-                        select suff from inp->try_get("suffix")
-                            suffix = suff->value_or((string)"")
-                        ;
-                        select sys from inp->try_get("issys")
-                            issys = sys->value_or(false)
-                        ;
-                        select stat from inp->try_get("static")
-                            isstatic = stat->value_or(false)
-                        ;
+                        name_str = inp->try_get_value_of("name", (string)"")
+                        content = inp->try_get_value_of("content", (string)"")
+                        secondarycontent = inp->try_get_value_of("secondarycontent", (string)"")
+                        operation = inp->try_get_value_of("operation", (string)"")
+                        prefix = inp->try_get_value_of("prefix", (string)"")
+                        suffix = inp->try_get_value_of("suffix", (string)"")
+                        issys = inp->try_get_value_of("issys", false)
+                        isstatic = inp->try_get_value_of("static", false)
                     ;
                     input_s.push_back(Input_S(name_str, content, secondarycontent, operation, prefix, suffix, issys, isstatic))
                 ;
