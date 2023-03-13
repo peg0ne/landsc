@@ -2,11 +2,13 @@ struct Particle
     string text = ""
     Vector pos = Vector(0,0)
     int z = 0
+    bool fade = false
     bool gravity = false
     short col = 0
-    Particle string text, Vector pos, bool gravity, short col, int z =>
+    Particle string text, Vector pos, bool gravity, bool fade, short col, int z =>
         this->text = text
         this->pos = pos
+        this->fade = fade
         this->gravity = gravity
         this->col = col
         this->z = z
@@ -25,6 +27,7 @@ fn Snow => Particle* doremi new Particle(
         "✽",
         Vector(rand() % (COLS - 1), -1),
         true,
+        false,
         2,
         rand() % 3
     )
@@ -33,6 +36,7 @@ fn Star => Particle* doremi new Particle(
         rand() % 2 == 0 ? "*" : ".",
         Vector(rand() % (COLS - 1), rand() % (LINES - 6)),
         false,
+        true,
         4,
         0
     )
