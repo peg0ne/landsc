@@ -114,36 +114,36 @@ pub
         init_pair(3, COLOR_WHITE, COLOR_WHITE)
         init_pair(4, 229, 234)
     ;
-    fn draw_name Ncurses *n =>
+    fn draw_name =>
         foreach i,inp in input_s
             if i == 0 do continue
-            n->add(3 + i, 5, $"{inp.get_name()}:")
+            Ncurses::add(3 + i, 5, $"{inp.get_name()}:")
         ;
     ;
-    fn draw_info Ncurses *n =>
+    fn draw_info =>
         foreach i,inp in input_s
             if i == 0
-                n->add(2, 5, inp.output())
+                Ncurses::add(2, 5, inp.output())
             ;
             else
-                n->add(3 + i, 10, inp.output())
+                Ncurses::add(3 + i, 10, inp.output())
             ;
         ;
     ;
-    fn draw_frame Ncurses *n =>
+    fn draw_frame =>
         let line = ""
         let space = ""
         for i until width do line += "━"; space += " "
-        n->add(1, 3, $"┏━{line}━┓")
-        n->add(2, 3, $"┃ {space} ┃")
-        n->add(3, 3, $"┃ {line} ┃")
+        Ncurses::add(1, 3, $"┏━{line}━┓")
+        Ncurses::add(2, 3, $"┃ {space} ┃")
+        Ncurses::add(3, 3, $"┃ {line} ┃")
         let end = -1
         if input_s.size() > 0
             for i until input_s.size() - 1
-                n->add(4 + i, 3, $"┃ {space} ┃")
+                Ncurses::add(4 + i, 3, $"┃ {space} ┃")
                 end = i
             ;
         ;
-        n->add(4 + end + 1, 3, $"┗━{line}━┛")
+        Ncurses::add(4 + end + 1, 3, $"┗━{line}━┛")
     ;
 ;
